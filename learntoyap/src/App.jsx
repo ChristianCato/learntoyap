@@ -1325,6 +1325,22 @@ function Onboarding({ onDismiss, T }) {
 
 // ─── MAIN ────────────────────────────────────────────────────────────────────
 export default function App() {
+  // Preconnect to Google Fonts for faster font loading
+  if (typeof document !== "undefined") {
+    const preconnects = [
+      "https://fonts.googleapis.com",
+      "https://fonts.gstatic.com",
+    ];
+    preconnects.forEach(href => {
+      if (!document.querySelector(`link[href="${href}"]`)) {
+        const link = document.createElement("link");
+        link.rel = href.includes("gstatic") ? "preconnect" : "preconnect";
+        link.href = href;
+        if (href.includes("gstatic")) link.crossOrigin = "anonymous";
+        document.head.prepend(link);
+      }
+    });
+  }
   const [dark, setDark]               = useState(false);
   const T                             = dark ? DARK : LIGHT;
 
@@ -1432,6 +1448,8 @@ export default function App() {
     <div style={{ minHeight: "100vh", background: T.bg, color: T.text, fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", transition: "background 0.3s, color 0.3s" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@800;900&display=swap');
+        @font-face { font-family: 'Inter'; font-display: swap; }
+        @font-face { font-family: 'Outfit'; font-display: swap; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         ::-webkit-scrollbar { width: 3px; }
         ::-webkit-scrollbar-thumb { background: ${T.border}; border-radius: 2px; }
