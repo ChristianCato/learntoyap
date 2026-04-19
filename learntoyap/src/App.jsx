@@ -1400,7 +1400,7 @@ export default function App() {
   return (
     <div style={{ minHeight: "100vh", background: T.bg, color: T.text, fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", transition: "background 0.3s, color 0.3s" }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@800;900&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
         ::-webkit-scrollbar { width: 3px; }
         ::-webkit-scrollbar-thumb { background: ${T.border}; border-radius: 2px; }
@@ -1452,11 +1452,13 @@ export default function App() {
 
       {/* HEADER */}
       <header style={{ padding: "14px 20px", borderBottom: `1px solid ${T.border}`, display: focusMode ? "none" : "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, background: dark ? "rgba(14,14,18,0.97)" : "rgba(247,247,245,0.97)", backdropFilter: "blur(16px)", zIndex: 100, transition: "background 0.3s" }} className="header-pad">
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <div style={{ width: 32, height: 32, background: T.text, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16 }}>🎙</div>
-          <div>
-            <p style={{ fontWeight: 800, fontSize: 15, letterSpacing: "-0.3px", lineHeight: 1, color: T.text }} className="header-logo-text">learntoyap.co</p>
-            <p style={{ fontSize: 9, color: T.textMuted, letterSpacing: "0.08em", textTransform: "uppercase", marginTop: 1 }}>for creators</p>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }} onClick={() => { setActiveTab("spin"); setView("spin"); }}>
+          <div style={{ width: 34, height: 34, background: "linear-gradient(135deg, #4F46E5, #7C3AED)", borderRadius: 9, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, boxShadow: "0 2px 8px rgba(79,70,229,0.35)" }}>
+            <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 900, fontSize: 20, color: "white", lineHeight: 1 }}>Y</span>
+          </div>
+          <div style={{ display: "flex", alignItems: "baseline", gap: 3 }}>
+            <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: 15, color: T.text, letterSpacing: "-0.3px", lineHeight: 1 }} className="header-logo-text">learn to </span>
+            <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 900, fontSize: 15, background: "linear-gradient(135deg, #4F46E5, #7C3AED)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", letterSpacing: "-0.3px", lineHeight: 1 }} className="header-logo-text">yap</span>
           </div>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
@@ -1715,19 +1717,19 @@ export default function App() {
         {/* ══ FRAMEWORKS TAB ══ */}
         {activeTab === "frameworks" && (
           <div style={{ animation: "fade-in 0.25s ease", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: 400, textAlign: "center", padding: "40px 20px" }}>
-            <div style={{ fontSize: 52, marginBottom: 20 }}>🔒</div>
+            <div style={{ fontSize: 52, marginBottom: 20 }}>🧱</div>
             <p style={{ fontWeight: 800, fontSize: 22, color: T.text, marginBottom: 8, letterSpacing: "-0.3px" }}>Frameworks</p>
             <p style={{ fontSize: 14, color: T.textSub, marginBottom: 6, lineHeight: 1.6, maxWidth: 340 }}>
-              PREP, Hook → Story → Lesson, 3-2-1 and more — structured practice to make great speaking automatic.
+              PREP, Hook → Story → Lesson, ELI5 and more. Structured practice to make great speaking automatic.
             </p>
             <div style={{ background: T.surfaceAlt, border: `1px solid ${T.border}`, borderRadius: 12, padding: "10px 20px", marginTop: 20 }}>
-              <p style={{ fontSize: 12, fontWeight: 700, color: T.textMuted, letterSpacing: "0.08em", textTransform: "uppercase" }}>Coming with Pro — learntoyap.co</p>
+              <p style={{ fontSize: 12, fontWeight: 700, color: T.textMuted, letterSpacing: "0.08em", textTransform: "uppercase" }}>Coming Soon</p>
             </div>
           </div>
         )}
         {/* FOOTER */}
         <div style={{ marginTop: 40, paddingTop: 20, borderTop: `1px solid ${T.border}`, textAlign: "center" }}>
-          <p style={{ fontSize: 12, color: T.textMuted }}>Made by a creator, for creators · <a href="https://learntoyap.co" style={{ color: T.textSub, textDecoration: "none", fontWeight: 600 }}>learntoyap.co</a></p>
+          <p style={{ fontSize: 12, color: T.textMuted }}>Free forever · Made by a creator, for creators · <a href="https://learntoyap.co" style={{ color: T.textSub, textDecoration: "none", fontWeight: 600 }}>learntoyap.co</a></p>
         </div>
       </div>
     </div>
