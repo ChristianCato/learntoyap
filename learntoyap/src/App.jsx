@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from "react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
+import { Analytics } from "@vercel/analytics/react";
 
 // ─── THEME ───────────────────────────────────────────────────────────────────
 const LIGHT = {
@@ -1756,6 +1758,9 @@ export default function App() {
             </div>
           </div>
         )}
+        <SpeedInsights />
+        <Analytics />
+
         {/* FOOTER */}
         <div style={{ marginTop: 40, paddingTop: 20, borderTop: `1px solid ${T.border}`, textAlign: "center" }}>
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
