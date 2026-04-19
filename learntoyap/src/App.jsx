@@ -1245,15 +1245,44 @@ function FrameworkCard({ fw, selected, onClick, T }) {
 
 // ─── CELEBRATION OVERLAY ─────────────────────────────────────────────────────
 function CelebrationOverlay({ onDismiss, T }) {
-  const msgs = ["Rep done. 🔥", "That's a take. 💪", "Good yap. 🎙️", "One more? 👀", "Growth. 📈"];
-  const msg  = msgs[Math.floor(Math.random() * msgs.length)];
+  const msgs = [
+    { emoji: "🔥", text: "Rep done." },
+    { emoji: "💪", text: "That's a take." },
+    { emoji: "📈", text: "Growth." },
+    { emoji: "🎙️", text: "Good yap." },
+    { emoji: "👀", text: "One more?" },
+  ];
+  const msg = msgs[Math.floor(Math.random() * msgs.length)];
   return (
-    <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.55)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 999, animation: "fade-in 0.2s ease" }} onClick={onDismiss}>
-      <div style={{ background: T.surface, borderRadius: 24, padding: "40px 48px", textAlign: "center", boxShadow: "0 24px 64px rgba(0,0,0,0.25)", animation: "pop-in 0.35s cubic-bezier(0.34,1.56,0.64,1)" }}>
-        <div style={{ fontSize: 56, marginBottom: 12 }}>✅</div>
-        <p style={{ fontSize: 28, fontWeight: 800, color: T.text, marginBottom: 6 }}>{msg}</p>
-        <p style={{ fontSize: 14, color: T.textSub, marginBottom: 24 }}>Tap anywhere to continue</p>
-        <button onClick={onDismiss} style={{ background: T.text, color: T.bg, border: "none", borderRadius: 100, padding: "12px 32px", fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>Next Rep →</button>
+    <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.6)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 999, animation: "fade-in 0.2s ease", padding: "20px" }} onClick={onDismiss}>
+      <div style={{ background: T.surface, borderRadius: 28, padding: "40px 36px", textAlign: "center", boxShadow: "0 24px 80px rgba(0,0,0,0.3)", animation: "pop-in 0.35s cubic-bezier(0.34,1.56,0.64,1)", maxWidth: 360, width: "100%" }} onClick={e => e.stopPropagation()}>
+
+        {/* Main message */}
+        <div style={{ fontSize: 52, marginBottom: 10 }}>{msg.emoji}</div>
+        <p style={{ fontSize: 26, fontWeight: 800, color: T.text, marginBottom: 4, letterSpacing: "-0.4px" }}>{msg.text}</p>
+        <p style={{ fontSize: 14, color: T.textSub, marginBottom: 28, lineHeight: 1.5 }}>You just did something most people only think about.</p>
+
+        {/* Challenge CTA */}
+        <div style={{ background: "linear-gradient(135deg, #4F46E5, #7C3AED)", borderRadius: 16, padding: "18px 20px", marginBottom: 20 }}>
+          <p style={{ fontSize: 13, fontWeight: 700, color: "white", marginBottom: 4 }}>Done a rep? Post it.</p>
+          <p style={{ fontSize: 12, color: "rgba(255,255,255,0.75)", marginBottom: 12, lineHeight: 1.5 }}>Tag <strong style={{ color: "white" }}>@learntoyap</strong> and use <strong style={{ color: "white" }}>#yapchallenge</strong> on Instagram or TikTok.</p>
+          <div style={{ display: "flex", gap: 8, justifyContent: "center" }}>
+            <a href="https://instagram.com/learntoyap" target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} style={{ display: "flex", alignItems: "center", gap: 5, background: "rgba(255,255,255,0.15)", borderRadius: 100, padding: "7px 14px", color: "white", textDecoration: "none", fontSize: 12, fontWeight: 600 }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              Instagram
+            </a>
+            <a href="https://tiktok.com/@learntoyap" target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} style={{ display: "flex", alignItems: "center", gap: 5, background: "rgba(255,255,255,0.15)", borderRadius: 100, padding: "7px 14px", color: "white", textDecoration: "none", fontSize: 12, fontWeight: 600 }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
+              TikTok
+            </a>
+          </div>
+        </div>
+
+        {/* Actions */}
+        <div style={{ display: "flex", gap: 10 }}>
+          <button onClick={onDismiss} style={{ flex: 1, background: T.text, color: T.bg, border: "none", borderRadius: 12, padding: "13px", fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>Next Rep →</button>
+          <button onClick={onDismiss} style={{ background: T.surfaceAlt, color: T.textSub, border: `1px solid ${T.border}`, borderRadius: 12, padding: "13px 16px", fontWeight: 600, fontSize: 13, cursor: "pointer", fontFamily: "inherit" }}>Done</button>
+        </div>
       </div>
     </div>
   );
@@ -1729,7 +1758,19 @@ export default function App() {
         )}
         {/* FOOTER */}
         <div style={{ marginTop: 40, paddingTop: 20, borderTop: `1px solid ${T.border}`, textAlign: "center" }}>
-          <p style={{ fontSize: 12, color: T.textMuted }}>Free forever · Made by a creator, for creators · <a href="https://learntoyap.co" style={{ color: T.textSub, textDecoration: "none", fontWeight: 600 }}>learntoyap.co</a></p>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
+            <p style={{ fontSize: 12, color: T.textMuted }}>Free forever · Made by a creator, for creators</p>
+            <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+              <a href="https://instagram.com/learntoyap" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 5, color: T.textSub, textDecoration: "none", fontSize: 12, fontWeight: 600 }}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                @learntoyap
+              </a>
+              <a href="https://tiktok.com/@learntoyap" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 5, color: T.textSub, textDecoration: "none", fontSize: 12, fontWeight: 600 }}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
+                @learntoyap
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
