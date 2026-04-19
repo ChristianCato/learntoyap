@@ -1692,7 +1692,7 @@ export default function App() {
 
             {/* ── TIMER VIEW ── */}
             {(view === "timer" || activeTab === "timer") && (
-              <div style={{ animation: "timer-in 0.3s cubic-bezier(0.34,1.2,0.64,1)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "calc(100vh - 80px)", gap: 20, marginTop: -20 }}>
+              <div style={{ animation: "timer-in 0.3s cubic-bezier(0.34,1.2,0.64,1)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "calc(100vh - 80px)", gap: 20, marginTop: -20, width: "100%", overflowX: "hidden" }}>
                 {topic && (
                 <div onClick={goToTopic} style={{ background: T.surface, border: `1px solid ${T.border}`, borderRadius: 100, padding: "9px 18px", cursor: "pointer", maxWidth: "100%", boxShadow: T.shadow }}>
                   <p style={{ fontSize: 12, fontWeight: 600, color: T.textSub, textAlign: "center", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: 360 }}>← {topic}</p>
@@ -1729,8 +1729,8 @@ export default function App() {
                 )}
 
                 {/* Ring */}
-                <div style={{ position: "relative", width: 210, height: 210 }} className="timer-ring-wrap">
-                  <svg width="210" height="210" style={{ transform: "rotate(-90deg)" }} className="timer-ring-svg">
+                <div style={{ position: "relative", width: "min(210px, 80vw)", height: "min(210px, 80vw)", margin: "0 auto" }} className="timer-ring-wrap">
+                  <svg width="100%" height="100%" viewBox="0 0 210 210" style={{ transform: "rotate(-90deg)" }} className="timer-ring-svg">
                     <circle cx="105" cy="105" r={r} fill="none" stroke={T.timerTrack} strokeWidth="7" />
                     <circle cx="105" cy="105" r={r} fill="none" stroke={timerDone ? "#16A34A" : timerRunning ? accentColor : T.borderStrong} strokeWidth="7" strokeDasharray={circ} strokeDashoffset={circ - (circ * timerProgress) / 100} strokeLinecap="round" style={{ transition: "stroke-dashoffset 0.95s linear, stroke 0.3s" }} />
                   </svg>
