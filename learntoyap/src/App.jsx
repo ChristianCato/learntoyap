@@ -1355,7 +1355,7 @@ export default function App() {
   const [selectedFw, setSelectedFw]   = useState(null);
   const [view, setView]               = useState("spin");
   const [recordPulse, setRecordPulse] = useState(false);
-  const [showOnboarding, setShowOnboarding] = useState(true);
+  const [showOnboarding, setShowOnboarding] = useState(() => localStorage.getItem("lty_onboarding_seen") !== "true");
   const [showCelebration, setShowCelebration] = useState(false);
   const [sessionTopics, setSessionTopics]     = useState(new Set());
   const [lastCombo, setLastCombo]             = useState(null);
@@ -1516,7 +1516,7 @@ export default function App() {
               🎙 {repsToday} rep{repsToday !== 1 ? "s" : ""} today
             </div>
           )}
-          <button onClick={() => setShowOnboarding(v => !v)} style={{ background: T.surfaceAlt, border: `1px solid ${T.border}`, borderRadius: 100, padding: "4px 10px", fontSize: 11, color: T.textSub, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>
+          <button onClick={() => { const next = !showOnboarding; setShowOnboarding(next); if (!next) localStorage.setItem("lty_onboarding_seen", "true"); }} style={{ background: T.surfaceAlt, border: `1px solid ${T.border}`, borderRadius: 100, padding: "4px 10px", fontSize: 11, color: T.textSub, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>
             {showOnboarding ? "Hide guide" : "How it works"}
           </button>
           <button onClick={() => setDark(d => !d)} style={{ width: 32, height: 32, borderRadius: "50%", border: `1px solid ${T.border}`, background: T.surface, cursor: "pointer", fontSize: 14, display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -1528,7 +1528,7 @@ export default function App() {
       <div style={{ maxWidth: 620, margin: "0 auto", padding: "20px 16px" }} className="main-pad">
 
         {/* ONBOARDING */}
-        {showOnboarding && <Onboarding T={T} onDismiss={() => setShowOnboarding(false)} />}
+        {showOnboarding && <Onboarding T={T} onDismiss={() => { setShowOnboarding(false); localStorage.setItem("lty_onboarding_seen", "true"); }} />}
 
         {/* TABS */}
         {!focusMode && (
@@ -1642,6 +1642,13 @@ export default function App() {
                       <p style={{ fontSize: 11, color: T.textMuted, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase" }}>{spinning ? "Spinning..." : topic ? "Spin Again" : "Record"}</p>
                     </div>
 
+                    {/* Transparent reset button — for re-recording */}
+                    {topic && !spinning && (
+                      <button onClick={() => { setTopic(null); setTopicType(null); setPrepNotes(""); resetTimer(TIMER_DURATIONS[timerMode]); }} style={{ background: "transparent", border: "none", borderRadius: 100, padding: "6px 16px", fontSize: 11, fontWeight: 600, color: T.textMuted, cursor: "pointer", fontFamily: "inherit", opacity: 0.5 }}>
+                        ↺ Reset spin
+                      </button>
+                    )}
+
                     {/* Exit focus mode */}
                     <button onClick={() => setFocusMode(false)} style={{ background: "none", border: `1px solid ${T.border}`, borderRadius: 100, padding: "6px 18px", fontSize: 11, fontWeight: 600, color: T.textMuted, cursor: "pointer", fontFamily: "inherit" }}>
                       ↓ Show settings
@@ -1710,7 +1717,7 @@ export default function App() {
                 </div>
 
                 {/* Prep notes */}
-                {timerMode === "prep" && !timerRunning && !timerDone && (
+                {timerMode === "prep" && !timerDone && (
                   <div style={{ width: "100%", maxWidth: 400 }}>
                     <textarea
                       value={prepNotes}
