@@ -1694,9 +1694,9 @@ export default function App() {
             {(view === "timer" || activeTab === "timer") && (
               <div style={{ animation: "timer-in 0.3s cubic-bezier(0.34,1.2,0.64,1)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "calc(100vh - 80px)", gap: 20, marginTop: -20, width: "100%", overflowX: "hidden" }}>
                 {topic && (
-                <div onClick={goToTopic} style={{ background: T.surface, border: `1px solid ${T.border}`, borderRadius: 100, padding: "9px 18px", cursor: "pointer", maxWidth: "100%", boxShadow: T.shadow }}>
+                <button onClick={goToTopic} style={{ background: T.surface, border: `1px solid ${T.border}`, borderRadius: 100, padding: "12px 20px", cursor: "pointer", maxWidth: "100%", boxShadow: T.shadow, fontFamily: "inherit", WebkitTapHighlightColor: "transparent", minHeight: 44 }}>
                   <p style={{ fontSize: 12, fontWeight: 600, color: T.textSub, textAlign: "center", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: 360 }}>← {topic}</p>
-                </div>
+                </button>
                 )}
 
                 {/* learntoyap watermark */}
